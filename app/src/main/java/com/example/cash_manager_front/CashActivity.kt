@@ -14,6 +14,5 @@ class CashActivity : AppCompatActivity() {
 
         val fragmentAdapter = PageAdapter(supportFragmentManager)
         viewpager_id.adapter = fragmentAdapter
-        tabLayout.setupWithViewPager(viewpager_id)
     }
 }
