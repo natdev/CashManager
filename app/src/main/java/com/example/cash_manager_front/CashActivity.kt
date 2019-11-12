@@ -7,7 +7,6 @@ import kotlinx.android.synthetic.main.activity_cash.*
 
 class CashActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cash)
@@ -15,5 +14,6 @@ class CashActivity : AppCompatActivity() {
         val fragmentAdapter = PageAdapter(supportFragmentManager)
         viewpager_id.adapter = fragmentAdapter
         tabLayout.setupWithViewPager(viewpager_id)
+
     }
 }
