@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.article.*
 import kotlinx.android.synthetic.main.fragment_list_article.*
+import kotlinx.android.synthetic.main.fragment_pay_mode.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,11 +35,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ListArticleFragment : Fragment(),View.OnClickListener {
-
-
     var articles = arrayOf<String>("gants de boxe", "chaussettes", "iphone")
     var prices = arrayOf<String>("20", "5", "450")
-    var number = arrayOf<Int>()
+    var number = Array<Int>(articles.size){0}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,29 +45,31 @@ class ListArticleFragment : Fragment(),View.OnClickListener {
     }
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
-                              savedInstanceState: Bundle?): View =
-        inflater.inflate(R.layout.fragment_list_article, container, false)
+                              savedInstanceState: Bundle?): View {
 
+        val rootView =  inflater.inflate(R.layout.fragment_list_article, container, false)
+        val recyclerView= rootView.findViewById(R.id.articles_recycler_view) as RecyclerView
+        recyclerView.layoutManager=LinearLayoutManager(activity)
+        recyclerView.adapter =ArticleAdapter(articles,prices,this)
+        return rootView
+    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // RecyclerView node initialized here
-        articles_recycler_view.apply {
-            // set a LinearLayoutManager to handle Android
-            // RecyclerView behavior
-            layoutManager = LinearLayoutManager(activity)
-            // set the custom adapter to the RecyclerView
-            adapter = ArticleAdapter(articles,prices,this)
+    override fun onClick(button: View?) {
+        if (button != null) {
+            if (button.tag !=null){
+                val index = button.tag as Int
+                val article = articles[index]
+                number[index]=number[index]+1
+                Toast.makeText(activity,"le numéro du boutton est  $article",Toast.LENGTH_SHORT).show()
+                Log.i("ListArticleFragment","${number[index].toString()}")
+            }
         }
-
-    }
-    override fun onClick(v: View?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        else  Toast.makeText(activity,"tag est nul",Toast.LENGTH_SHORT).show()
+        }
 
 
     companion object {
         fun newInstance(): ListArticleFragment = ListArticleFragment()
     }
-}
 
+}
