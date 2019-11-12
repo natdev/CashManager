@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="background_menu">#2A5760</color>
+=======
+    <color name="colorPrimary">#A9A9A9</color>
+    <color name="colorPrimaryDark">#696969</color>
+    <color name="colorAccent">#DCDCDC</color>
+    <color name="acceuil">#25b7d3</color>
+    <color name="prix">#2092a8</color>
+    <color name="navbar">#2a5760</color>
+    <color name="article">#1e7c8e</color>
+>>>>>>> 177df40e6aed3bf2ccec2e55685b60519320ecb3
 </resources>
