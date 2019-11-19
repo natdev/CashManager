@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ArticleAdapter(val articles :Array<String>, val prices:Array<String>,val itemClickListener: View.OnClickListener)
+class ArticleAdapter(val articles :Array<String>, val prices:Array<Int>,val itemClickListener: View.OnClickListener)
     : RecyclerView.Adapter<ArticleAdapter.ViewHolder> () {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -18,7 +18,6 @@ class ArticleAdapter(val articles :Array<String>, val prices:Array<String>,val i
             val Article=itemView.findViewById(R.id.NameArticle) as TextView
             val button = itemView.findViewById(R.id.AddCart) as TextView
             val nameTextView = itemView.findViewById(R.id.Price) as TextView
-
 
     }
 
@@ -32,7 +31,7 @@ class ArticleAdapter(val articles :Array<String>, val prices:Array<String>,val i
         val article = articles[position]
         val price = prices[position]
         holder.Article.text=article
-        holder.nameTextView.text=price
+        holder.nameTextView.text=price.toString()
         holder.button.tag=position
         holder.button.setOnClickListener(itemClickListener)
 
