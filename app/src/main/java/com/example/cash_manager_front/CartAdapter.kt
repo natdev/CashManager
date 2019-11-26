@@ -34,7 +34,6 @@ class CartAdapter(var finaldata:ArrayList<Article>,val ClickListener: View.OnCli
         val article = finaldata[position].name
         var price = finaldata[position].price
         val quantity = finaldata[position].quantity
-        price = quantity*price
         holder.Article.text=article
         holder.nameTextView.text=price.toString()
         holder.quantity.text= quantity.toString()

@@ -31,6 +31,7 @@ import java.util.zip.Inflater
 class CartFragment : Fragment(), View.OnClickListener{
     var datafinal : ArrayList<Parcelable>? = arrayListOf()
     lateinit var adapter: CartAdapter
+    lateinit var comm: Communicator
    // var price : String?=""
 
     override fun onCreateView(
@@ -78,37 +79,45 @@ class CartFragment : Fragment(), View.OnClickListener{
                     datafinal[index].price,
                     datafinal[index].quantity
                 )
-                removeTalble(article,index, layoutInflater,container = null)
+                removeTalble(article,index)
             }
         }
     }
-    fun removeTalble(article: Article,position:Int,inflater: LayoutInflater, container: ViewGroup?) {
+    fun removeTalble(article: Article,position:Int)  {
         val datafinal: ArrayList<Article> = datafinal as ArrayList<Article>
         for (data in datafinal) {
             if (data.name == article.name) {
                 data.quantity = data.quantity - 1
                 Log.i("remove",data.quantity.toString())
+                val datafinal: ArrayList<Parcelable> = datafinal as ArrayList<Parcelable>
+                comm = activity as Communicator
+                comm.passDataCom(datafinal)
+                adapter.notifyDataSetChanged()
             }
             }
         if (article.quantity == 1) {
             adapter.removeItem(position)
         }
-        val RootView2 =  inflater.inflate(R.layout.fragment_cart, container, false)
-        var totalCart=RootView2.findViewById<TextView>(R.id.total)
-        totalCart.setText(total.toString()).toString()
-        Log.i("panier2","$total")
-
+        priceTotal(datafinal)
     }
     var total = 0
 
 
     fun priceTotal(datafinal:ArrayList<Article>) {
-
+        total=0
         for (data in datafinal) {
             total += (data.price * data.quantity)
         }
-        Log.i("panier","$total")
+            Log.i("panier","$total")
     }
+    companion object {
+        fun newInstance(): CartFragment {
+            return CartFragment()
+        }
+    }
+
 }
+
+
 
 
